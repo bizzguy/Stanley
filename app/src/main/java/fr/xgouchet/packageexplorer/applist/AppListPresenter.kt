@@ -18,7 +18,7 @@ import io.reactivex.subjects.BehaviorSubject
  */
 class AppListPresenter(context: Context)
     : BaseListPresenter<AppViewModel, AppListFragment>(AppListNavigator()),
-        ContextHolder {
+    ContextHolder {
 
     companion object {
         val KEY_SORT = "sort"
@@ -41,44 +41,44 @@ class AppListPresenter(context: Context)
 
     init {
         val filteredList = Observable.combineLatest(
-                dataSubject,
-                filterSubject,
-                BiFunction<List<AppViewModel>, String, List<AppViewModel>> { list, filter ->
-                    val lowerCaseFilter = filter.toLowerCase()
-                    return@BiFunction list.filter {
-                        if (filter.isEmpty()) {
-                            return@filter true
-                        } else {
-                            return@filter it.title.toLowerCase().contains(lowerCaseFilter) || it.packageName.toLowerCase().contains(lowerCaseFilter)
-                        }
-                    }
-                })
-
-        val systemAppFilteredList = Observable.combineLatest(
-                filteredList,
-                systemAppVisibilitySubject,
-                BiFunction<List<AppViewModel>, Boolean, List<AppViewModel>> { list, system ->
-                    return@BiFunction list.filter {
-                        if (system) {
-                            return@filter true
-                        } else {
-                            return@filter (it.flags and ApplicationInfo.FLAG_SYSTEM) == 0
-                        }
+            dataSubject,
+            filterSubject,
+            BiFunction<List<AppViewModel>, String, List<AppViewModel>> { list, filter ->
+                val lowerCaseFilter = filter.toLowerCase()
+                return@BiFunction list.filter {
+                    if (filter.isEmpty()) {
+                        return@filter validFootlockerPackage(it, lowerCaseFilter)
+                    } else {
+                        return@filter validFootlockerPackage(it, lowerCaseFilter)
                     }
                 }
+            })
+
+        val systemAppFilteredList = Observable.combineLatest(
+            filteredList,
+            systemAppVisibilitySubject,
+            BiFunction<List<AppViewModel>, Boolean, List<AppViewModel>> { list, system ->
+                return@BiFunction list.filter {
+                    if (system) {
+                        return@filter true
+                    } else {
+                        return@filter (it.flags and ApplicationInfo.FLAG_SYSTEM) == 0
+                    }
+                }
+            }
         )
 
         val sortedList = Observable.combineLatest(
-                systemAppFilteredList,
-                sortSubject,
-                BiFunction<List<AppViewModel>, Comparator<AppViewModel>, List<AppViewModel>> { list, comp ->
-                    return@BiFunction list.sortedWith(comp)
-                })
+            systemAppFilteredList,
+            sortSubject,
+            BiFunction<List<AppViewModel>, Comparator<AppViewModel>, List<AppViewModel>> { list, comp ->
+                return@BiFunction list.sortedWith(comp)
+            })
 
         loadingDisposable = sortedList
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ onItemsLoaded(it) }, { displayer?.setError(it) })
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ onItemsLoaded(it) }, { displayer?.setError(it) })
 
 
         sortSubject.onNext(currentSort.comparator)
@@ -97,19 +97,18 @@ class AppListPresenter(context: Context)
             }
 
             disposable = Observable.create(AppListSource(context))
-                    .subscribeOn(Schedulers.io())
-                    .toList()
-                    .subscribe(
-                            {
-                                memoizedAppList = it
-                                dataSubject.onNext(it)
-                            },
-                            { displayer?.setError(it) }
-                    )
+                .subscribeOn(Schedulers.io())
+                .toList()
+                .subscribe(
+                    {
+                        memoizedAppList = it
+                        dataSubject.onNext(it)
+                    },
+                    { displayer?.setError(it) }
+                )
         }
 
     }
-
 
     fun setSort(sort: AppSort) {
         currentSort = sort
@@ -128,9 +127,23 @@ class AppListPresenter(context: Context)
 
     fun areSystemAppsVisible(): Boolean = systemAppVisible
 
-
     override fun itemSelected(item: AppViewModel) {
         navigator?.goToItemDetails(item)
     }
 
+    private fun validFootlockerPackage(it: AppViewModel, lowerCaseFilter: String): Boolean {
+
+        val flPackages = listOf(
+            "com.footlocker.kids",
+            "com.footlocker.approved",
+            "com.champssports.champssports",
+            "com.footaction.footaction",
+            "com.eastbay.eastbay",
+            "com.footlocker.canada",
+            "com.footlocker.europe.uk"
+        )
+
+        return it.packageName.toLowerCase() in flPackages
+
+    }
 }

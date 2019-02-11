@@ -38,12 +38,12 @@
     <string name="activity_title_about">About Stanley…</string>
     <string name="activity_title_apkDetails">APK file details</string>
     <string name="activity_title_appDetails">Application details</string>
-    <string name="activity_title_appList">Stanley</string>
+    <string name="activity_title_appList">Footlocker Apps</string>
     <string name="activity_title_licenses">Third party licenses</string>
     <string name="activity_title_certificateAppList">Certificate App List</string>
 
     <string name="app_installed_on">Installed on :</string>
-    <string name="app_name">Stanley</string>
+    <string name="app_name">Footlocker Apps</string>
     <string name="app_updated_on">Updated on :</string>
 
     <string name="dialog_title_launcher">Open</string>
