@@ -45,6 +45,7 @@
     <string name="app_installed_on">Installed on :</string>
     <string name="app_name">Footlocker Apps</string>
     <string name="app_updated_on">Updated on :</string>
+    <string name="app_version_name">Version :</string>
 
     <string name="dialog_title_launcher">Open</string>
 

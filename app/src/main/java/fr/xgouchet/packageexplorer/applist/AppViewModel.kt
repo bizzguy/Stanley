@@ -26,7 +26,8 @@ data class AppViewModel(val packageName: String = "",
                         val installTime: Long = 0,
                         val updateTime: Long = 0,
                         val flags: Int = 0,
-                        val certificates: List<X509Certificate> = emptyList()) {
+                        val certificates: List<X509Certificate> = emptyList(),
+                        val versionName: String = "") {
 
     val installTimeStr = DATE_FORMAT.format(Date(installTime))
     val updateTimeStr = DATE_FORMAT.format(Date(updateTime))
@@ -68,7 +69,8 @@ data class AppViewModel(val packageName: String = "",
                     installTime = pi.firstInstallTime,
                     updateTime = pi.lastUpdateTime,
                     flags = ai.flags,
-                    certificates = listOfNotNull(*certificates)
+                    certificates = listOfNotNull(*certificates),
+                    versionName = "" //pi.versionName
             )
         }
 
