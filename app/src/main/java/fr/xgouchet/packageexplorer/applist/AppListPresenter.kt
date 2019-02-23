@@ -134,7 +134,6 @@ class AppListPresenter(context: Context)
     private fun validFootlockerPackage(it: AppViewModel, lowerCaseFilter: String): Boolean {
 
         val flPackages = listOf(
-                "fr.xgouchet.packageexplorer.debug",
                 "com.footlocker.kids",
                 "com.footlocker.approved",
                 "com.champssports.champssports",

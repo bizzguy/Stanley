@@ -49,7 +49,7 @@ abstract class BaseListPresenter<T, D>(val navigator: Navigator<T>?)
     // region ListPresenter
 
     override fun itemSelected(item: T) {
-        navigator?.goToItemDetails(item)
+        navigator?.goToItemEdition(item)
     }
 
     // endregion
