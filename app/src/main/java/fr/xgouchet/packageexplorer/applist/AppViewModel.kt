@@ -11,8 +11,7 @@ import android.graphics.drawable.Drawable
 import timber.log.Timber
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 import javax.security.cert.CertificateException
 import javax.security.cert.X509Certificate
 
@@ -70,7 +69,7 @@ data class AppViewModel(val packageName: String = "",
                     updateTime = pi.lastUpdateTime,
                     flags = ai.flags,
                     certificates = listOfNotNull(*certificates),
-                    versionName = "" //pi.versionName
+                    versionName = pi.versionName
             )
         }
 

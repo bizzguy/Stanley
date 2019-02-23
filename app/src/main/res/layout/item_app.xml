@@ -149,7 +149,7 @@
                 android:textStyle="italic"
                 app:layout_constraintEnd_toStartOf="@+id/text_update"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_package_name" />
+                app:layout_constraintTop_toBottomOf="@+id/text_install_label" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/text_update"
@@ -181,7 +181,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/text_update"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_install_label" />
+                app:layout_constraintTop_toBottomOf="@+id/text_update_label" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/text_version"
@@ -197,7 +197,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/text_install_label"
-                app:layout_constraintTop_toBottomOf="@+id/text_install"
+                app:layout_constraintTop_toBottomOf="@+id/text_update"
                 tools:text="3.5.0" />
 
             <ImageButton
