@@ -128,7 +128,7 @@ class AppListPresenter(context: Context)
     fun areSystemAppsVisible(): Boolean = systemAppVisible
 
     override fun itemSelected(item: AppViewModel) {
-        navigator?.goToItemDetails(item)
+        navigator?.goToItemEdition(item)
     }
 
     private fun validFootlockerPackage(it: AppViewModel, lowerCaseFilter: String): Boolean {
