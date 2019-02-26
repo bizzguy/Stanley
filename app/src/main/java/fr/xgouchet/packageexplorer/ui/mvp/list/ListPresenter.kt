@@ -10,4 +10,6 @@ interface ListPresenter<T> : Presenter<List<T>> {
 
     fun itemSelected(item: T)
 
+    fun itemDetails(item: T)
+
 }

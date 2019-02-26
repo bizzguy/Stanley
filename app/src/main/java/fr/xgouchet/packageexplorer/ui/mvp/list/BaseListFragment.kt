@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.*
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +21,8 @@ import io.reactivex.functions.BiConsumer
  */
 abstract class BaseListFragment<T, P : ListPresenter<T>>
     : Fragment(),
-        ListDisplayer<T>,
-        BiConsumer<T, View?> {
+    ListDisplayer<T>,
+    BiConsumer<T, View?> {
 
     internal val list: RecyclerView by knife(android.R.id.list)
     private val loading: ProgressBar by knife(R.id.loading)
@@ -35,10 +35,10 @@ abstract class BaseListFragment<T, P : ListPresenter<T>>
     abstract val isFabVisible: Boolean
     abstract val fabIconOverride: Int?
 
-
     // region Fragment
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_list, container, false)
         return view
     }
@@ -89,8 +89,18 @@ abstract class BaseListFragment<T, P : ListPresenter<T>>
     // region BiConsumer<T, View?>
 
     override fun accept(t: T, v: View?) {
-        presenter.itemSelected(t)
+
+        Log.d("click", "view " + v)
+        if (v is AppCompatImageButton) {
+            Log.d("click", "button selected")
+            presenter.itemDetails(t)
+        } else if (v is CardView) {
+            Log.d("click", "cardview selected")
+            presenter.itemSelected(t)
+        } else {
+            Log.d("click", "no view handling")
+            presenter.itemSelected(t)
+        }
     }
 
-    // endregion
 }

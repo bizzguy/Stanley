@@ -2,6 +2,7 @@ package fr.xgouchet.packageexplorer.applist
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.util.Log
 import fr.xgouchet.packageexplorer.applist.sort.AppSort
 import fr.xgouchet.packageexplorer.core.utils.ContextHolder
 import fr.xgouchet.packageexplorer.core.utils.Notebook.notebook
@@ -128,7 +129,12 @@ class AppListPresenter(context: Context)
     fun areSystemAppsVisible(): Boolean = systemAppVisible
 
     override fun itemSelected(item: AppViewModel) {
+        Log.d("click", "presenter.itemSelected")
         navigator?.goToItemEdition(item)
+    }
+    override fun itemDetails(item: AppViewModel) {
+        Log.d("click", "presenter.itemDetails")
+        navigator?.goToItemDetails(item)
     }
 
     private fun validFootlockerPackage(it: AppViewModel, lowerCaseFilter: String): Boolean {

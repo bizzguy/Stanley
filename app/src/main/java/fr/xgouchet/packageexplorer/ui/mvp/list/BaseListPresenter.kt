@@ -52,6 +52,10 @@ abstract class BaseListPresenter<T, D>(val navigator: Navigator<T>?)
         navigator?.goToItemEdition(item)
     }
 
+    override fun itemDetails(item: T) {
+        navigator?.goToItemDetails(item)
+    }
+
     // endregion
 
     // region Callbacks
