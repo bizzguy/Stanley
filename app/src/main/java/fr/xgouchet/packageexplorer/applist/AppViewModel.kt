@@ -26,10 +26,10 @@ data class AppViewModel(val packageName: String = "",
                         val updateTime: Long = 0,
                         val flags: Int = 0,
                         val certificates: List<X509Certificate> = emptyList(),
-                        val versionName: String? = "") {
+                        val version: String? = "") {
 
     val installTimeStr = DATE_FORMAT.format(Date(installTime))
-    val updateTimeStr = DATE_FORMAT.format(Date(updateTime))
+    var updateTimeStr = DATE_TIME_FORMAT.format(Date(updateTime))
     val isSystemApp = (flags and ApplicationInfo.FLAG_SYSTEM != 0)
     val isDebuggable = (flags and ApplicationInfo.FLAG_DEBUGGABLE != 0)
     val isLargeHeap = (flags and ApplicationInfo.FLAG_LARGE_HEAP != 0)
@@ -62,6 +62,10 @@ data class AppViewModel(val packageName: String = "",
                     .filter { it != null }
                     .toTypedArray()
 
+            val updateTime = pi.lastUpdateTime.toString() + "CST"
+
+            // if date is today then show "Today at hh:mm"
+
             return AppViewModel(packageName = ai.packageName,
                     title = pm.getApplicationLabel(ai).toString(),
                     icon = pm.getApplicationIcon(ai),
@@ -69,10 +73,12 @@ data class AppViewModel(val packageName: String = "",
                     updateTime = pi.lastUpdateTime,
                     flags = ai.flags,
                     certificates = listOfNotNull(*certificates),
-                    versionName = pi.versionName
+                    version = pi.versionName + "  (" + pi.versionCode + ")"
             )
         }
 
         val DATE_FORMAT: DateFormat = SimpleDateFormat.getDateInstance(DateFormat.LONG, Locale.US)
+        val DATE_TIME_FORMAT: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US)
+
     }
 }
