@@ -13,7 +13,6 @@
         android:scrollbars="vertical"
         tools:visibility="visible" />
 
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -42,8 +41,8 @@
         android:layout_margin="16dp"
         android:gravity="center_horizontal"
         android:text="@string/msg_empty_app_list"
-        android:textColor="@color/secondary_text"
         android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/secondary_text"
         android:visibility="gone"
         tools:visibility="visible" />
 

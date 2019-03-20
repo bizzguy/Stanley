@@ -34,6 +34,10 @@ data class AppViewModel(val packageName: String = "",
     val isDebuggable = (flags and ApplicationInfo.FLAG_DEBUGGABLE != 0)
     val isLargeHeap = (flags and ApplicationInfo.FLAG_LARGE_HEAP != 0)
 
+    init {
+        updateTimeStr  = DATE_FORMAT.format(Date(updateTime)) + " at " + DATE_TIME_FORMAT_SHORT.format(Date(updateTime))
+    }
+
     companion object {
 
         fun fromPackageName(context: Context, packageName: String): AppViewModel? {
@@ -78,7 +82,8 @@ data class AppViewModel(val packageName: String = "",
         }
 
         val DATE_FORMAT: DateFormat = SimpleDateFormat.getDateInstance(DateFormat.LONG, Locale.US)
-        val DATE_TIME_FORMAT: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US)
+        val DATE_TIME_FORMAT: DateFormat = SimpleDateFormat("yyyy-MM-dd  h:mm", Locale.US)
+        val DATE_TIME_FORMAT_SHORT: DateFormat = SimpleDateFormat("h:mm a", Locale.US)
 
     }
 }

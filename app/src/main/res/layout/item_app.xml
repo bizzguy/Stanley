@@ -135,7 +135,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/text_install_label"
-                app:layout_constraintTop_toBottomOf="@+id/text_package_name"
+                app:layout_constraintBaseline_toBaselineOf="@+id/text_install_label"
                 tools:text="September 15, 2012" />
 
             <android.support.v7.widget.AppCompatTextView

@@ -23,8 +23,8 @@ android {
         targetSdkVersion AndroidBuild.TargetSdk
 
         applicationId "fr.xgouchet.packageexplorer"
-        versionCode 17
-        versionName "3.0"
+        versionCode 20190320
+        versionName "2019-03-20"
 
         vectorDrawables.useSupportLibrary = true
     }
